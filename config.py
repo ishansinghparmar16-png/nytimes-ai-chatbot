@@ -18,7 +18,18 @@ class Settings:
     
     def __init__(self):
         # Try Streamlit secrets first (for Streamlit Cloud), then fall back to env vars
-        if HAS_STREAMLIT and hasattr(st, 'secrets') and len(st.secrets) > 0:
+        use_streamlit_secrets = False
+        
+        if HAS_STREAMLIT and hasattr(st, 'secrets'):
+            try:
+                # Try to access secrets - will raise exception if not available
+                _ = st.secrets.get("NYT_API_KEY", None)
+                use_streamlit_secrets = True
+            except Exception:
+                # Secrets not available (local development)
+                use_streamlit_secrets = False
+        
+        if use_streamlit_secrets:
             # Running on Streamlit Cloud - use st.secrets
             self.nyt_api_key = st.secrets.get("NYT_API_KEY", "")
             self.openai_api_key = st.secrets.get("OPENAI_API_KEY", "")
