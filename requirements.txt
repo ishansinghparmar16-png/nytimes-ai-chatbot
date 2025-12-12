@@ -1,0 +1,16 @@
+python-dotenv==1.0.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+langchain==0.1.0
+langchain-openai==0.0.2
+langchain-anthropic==0.1.1
+langgraph==0.0.20
+
+requests==2.31.0
+httpx==0.25.2
+
+streamlit==1.29.0
+streamlit-chat==0.1.1
+
+typing-extensions==4.9.0
